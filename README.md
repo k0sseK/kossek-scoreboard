@@ -1,5 +1,5 @@
 <div align='center'><img src='https://i.imgur.com/2cpkTt9.png'/></div>
-<div align='center'><h3><a href='https://k0ssek-scripts.tebex.io/'>My other resources</a></h3></div>
+<div align='center'><h3><a href='https://k0ssek-scripts.tebex.io/'>My other resources!</a></h3></div>
 
 ## Description
    
