@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kossek-scoreboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.prod.js"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="scoreboard" style="display: none;">
+        <div class="header">
+            <div class="left-side">
+                <img class="logo" src="./assets/logo.png"/>
+                <div class="info">
+                    <span class="server-name">{{ serverName }}</span>
+                    <span class="status">{{ counter.players }}/{{ slots }}</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="service police">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span class="count">{{ counter.police }}</span>
+                    <span class="name">LSPD</span>
+                </div>
+                <div class="service ambulance">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span class="count">{{ counter.ambulance }}</span>
+                    <span class="name">EMS</span>
+                </div>
+                <div class="service mechanic">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span class="count">{{ counter.mechanic }}</span>
+                    <span class="name">LSC</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="player-list" id="player-list">
+            <div class="player" v-for="(value, index) in this.players" :key="index" :class="{ self: value.id == myId }">
+                <img class="avatar" :src="value.avatar"/>
+                <div class="info">
+                    <div class="name">
+                        <span class="username">{{ value.name }}</span>
+                        <span class="id">{{ value.id }}</span>
+                    </div>
+                    <div class="identifier">{{ value.identifier }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

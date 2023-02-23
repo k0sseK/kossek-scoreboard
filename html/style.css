@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+
+:root {
+    --scoreboard-background: rgba(20, 20, 20, 0.85);
+    --player-background: rgb(39, 39, 39, 0.8);
+
+    --police-color: #6AA6FF;
+    --police-background: #2562BD;
+    
+    --ambulance-color: #FF8D8D;
+    --ambulance-background: #B83D3D;
+
+    --mechanic-color: #FFE1B5;
+    --mechanic-background: #F2A634;
+}
+
+body, * {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+}
+
+#scoreboard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--scoreboard-background);
+    width: 956px;
+    height: 740px;
+    border-radius: 10px;
+    padding: 40px 100px 40px 100px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(0.25turn, #11998e, #38ef7d);
+    border-image-slice: 1;
+}
+
+.left-side {
+    display: flex;
+
+    width: 50%;
+    height: 100%;
+}
+
+.left-side > .info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 7px;
+}
+
+.left-side > .info > .server-name {
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.left-side > .info > .status {
+    color: #C0C0C0;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+}
+
+.right-side > .service {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    margin: 0 10px 0 10px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.right-side > .service > * {
+    margin: 0 5px 0 5px;
+}
+
+.police {
+    color: var(--police-color);
+    background: var(--police-background);
+}
+
+.ambulance {
+    color: var(--ambulance-color);
+    background: var(--ambulance-background);
+}
+
+.mechanic {
+    color: var(--mechanic-color);
+    background: var(--mechanic-background);
+}
+
+.player-list {
+    overflow-y: scroll;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: 620px;
+    gap: 10px;
+    margin: 20px 0 0 3px;
+    width: calc(100% + 10px);
+}
+
+.player {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    background: var(--player-background);
+    padding: 5px;
+    border-radius: 5px;
+    width: 300px;
+    height: 50px;
+}
+
+.player > * {
+    margin: 7px;
+}
+
+.player > .avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.player > .info {
+    display: flex;
+    flex-direction: column;
+}
+
+.player .username {
+    color: white;
+    font-weight: 700;
+}
+
+.player .id {
+    text-align: center;
+    color: rgb(224, 224, 224);
+    background: rgb(87, 87, 87);
+    border-radius: 4px;
+    padding: 0 8px 0 8px;
+    margin-left: 4px;
+}
+
+.player .identifier {
+    color: #C0C0C0;
+    font-weight: 500;
+}
+
+.self {
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(0.25turn, #11998e, #38ef7d);
+    border-image-slice: 1;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #38da76;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
