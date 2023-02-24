@@ -4,31 +4,24 @@ local Scoreboard = {
 }
 
 local function GetAvatar(playerId)
-    local image = nil
     local steamHex = GetPlayerIdentifier(playerId, 0)
 
+    local p = promise.new()
     if steamHex and steamHex ~= '' then
         local steamId = tonumber(string.gsub(steamHex, 'steam:', ''), 16)
+
         if steamId then
             PerformHttpRequest('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .. GetConvar('steam_webApiKey') .. '&steamids=' .. steamId, function(e, data, h)
                 local data = json.decode(data) or {}
                 if data and data.response and data.response.players[1] then
                     local avatar = data.response.players[1].avatarfull
-                    if avatar then
-                        image = avatar
-                    end
+                    p:resolve(avatar or nil)
                 end
             end)
         end
-
-        local tick = 0
-        while steamId and not image and tick < 100 do
-            tick += 1
-            Wait(1)
-        end
-
-        return image
     end
+
+    return Citizen.Await(p)
 end
 
 local function UpdateCounter()

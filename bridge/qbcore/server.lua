@@ -26,6 +26,6 @@ function GetPlayerFromId(source)
     return QBCore.Functions.GetPlayer(source)
 end
 
-function GerServerPlayers()
+function GetServerPlayers()
     return QBCore.Functions.GetQBPlayers()
 end
