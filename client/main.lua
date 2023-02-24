@@ -44,22 +44,20 @@ local function DrawText3D(x, y, z, text, color)
 end
 
 local function DrawId()
-    if Config.IdOverHead then
-        while Scoreboard.displaying do
-            Wait(3)
-            local playerId = PlayerId()
-            local playerPed = PlayerPedId()
-            for _, player in ipairs(GetActivePlayers()) do
-                if player ~= playerId then
-                    local targetPed = Citizen.InvokeNative(0x43A66C31C68491C0, player)
+    while Scoreboard.displaying do
+        Wait(3)
+        local playerId = PlayerId()
+        local playerPed = PlayerPedId()
+        for _, player in ipairs(GetActivePlayers()) do
+            if player ~= playerId then
+                local targetPed = Citizen.InvokeNative(0x43A66C31C68491C0, player)
 
-                    if IsEntityVisible(targetPed) then
-                        local coords1 = GetPedBoneCoords(playerPed, 31086, -0.4, 0.0, 0.0)
-                        local coords2 = GetPedBoneCoords(targetPed, 31086, -0.4, 0.0, 0.0)
-                        local dst = 40.0
-                        if #(coords1 - coords2) < dst then
-                            DrawText3D(coords2.x, coords2.y, coords2.z + 1.2, GetPlayerServerId(player), (NetworkIsPlayerTalking(player) and {0, 0, 255} or {255, 255, 255}))
-                        end
+                if IsEntityVisible(targetPed) then
+                    local coords1 = GetPedBoneCoords(playerPed, 31086, -0.4, 0.0, 0.0)
+                    local coords2 = GetPedBoneCoords(targetPed, 31086, -0.4, 0.0, 0.0)
+                    local dst = 40.0
+                    if #(coords1 - coords2) < dst then
+                        DrawText3D(coords2.x, coords2.y, coords2.z + 1.2, GetPlayerServerId(player), (NetworkIsPlayerTalking(player) and {0, 0, 255} or {255, 255, 255}))
                     end
                 end
             end
@@ -119,7 +117,9 @@ RegisterCommand('+scoreboard', function()
     end
 
     OpenScoreboard()
-    DrawId()
+    if Config.IdOverHead then
+        DrawId()
+    end
 end)
 
 RegisterCommand('-scoreboard', function()
