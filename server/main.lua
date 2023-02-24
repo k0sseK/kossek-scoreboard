@@ -45,7 +45,7 @@ end
 
 function AddPlayer(player, restart)
     local playerId = GetSource(player)
-    
+
     Scoreboard.players[playerId] = {
         id = playerId,
         identifier = GetPlayerIdentifier(playerId, 0),
@@ -57,11 +57,13 @@ function AddPlayer(player, restart)
     if not restart then
         TriggerClientEvent('kossek-scoreboard:addPlayer', -1, Scoreboard.players[playerId])
     end
+
+    UpdateCounter()
 end
 
 function PlayerLoaded(player)
     AddPlayer(player)
-    TriggerClientEvent('kossek-scoreboard:playerLoaded', -1, Scoreboard.players)
+    TriggerClientEvent('kossek-scoreboard:playerLoaded', GetSource(player), Scoreboard.players)
 end
 
 function RemovePlayer(playerId)
@@ -94,7 +96,6 @@ AddEventHandler('onResourceStart', function(name)
 				end
 			end
 
-            UpdateCounter()
             TriggerClientEvent('kossek-scoreboard:playerLoaded', -1, Scoreboard.players)
 		end
 	end
