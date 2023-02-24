@@ -19,7 +19,7 @@ function GetSource(player)
 end
 
 function GetPlayerJob(player)
-    return player.job
+    return player.PlayerData.job
 end
 
 function GetPlayerFromId(source)
