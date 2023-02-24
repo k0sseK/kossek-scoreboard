@@ -3,7 +3,7 @@ if GetResourceState('qb-core') ~= 'started' then return end
 QBCore = exports['qb-core']:GetCoreObject()
 
 AddEventHandler('QBCore:Server:PlayerLoaded', function(player)
-	AddPlayer(player)
+	PlayerLoaded(player)
 end)
 
 AddEventHandler('QBCore:Server:OnJobUpdate', function(playerId, job)

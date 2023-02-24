@@ -3,7 +3,7 @@ if GetResourceState('es_extended') ~= 'started' then return end
 ESX = exports.es_extended:getSharedObject()
 
 AddEventHandler('esx:playerLoaded', function(playerId, player)
-	AddPlayer(player)
+    PlayerLoaded(player)
 end)
 
 AddEventHandler('esx:setJob', function(playerId, job, lastJob)

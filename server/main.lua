@@ -43,7 +43,7 @@ local function UpdateCounter()
     GlobalState['scoreboard_counter'] = Scoreboard.counter
 end
 
-function AddPlayer(player)
+function AddPlayer(player, restart)
     local playerId = GetSource(player)
     
     Scoreboard.players[playerId] = {
@@ -54,7 +54,14 @@ function AddPlayer(player)
         job = GetPlayerJob(player).name
     }
 
-    TriggerClientEvent('kossek-scoreboard:addPlayer', -1, Scoreboard.players[playerId])
+    if not restart then
+        TriggerClientEvent('kossek-scoreboard:addPlayer', -1, Scoreboard.players[playerId])
+    end
+end
+
+function PlayerLoaded(player)
+    AddPlayer(player)
+    TriggerClientEvent('kossek-scoreboard:playerLoaded', -1, Scoreboard.players)
 end
 
 function RemovePlayer(playerId)
@@ -83,11 +90,12 @@ AddEventHandler('onResourceStart', function(name)
 				local player = GetPlayerFromId(GetSource(players[i]))
 
 				if player then
-					AddPlayer(player)
+					AddPlayer(player, true)
 				end
 			end
 
             UpdateCounter()
+            TriggerClientEvent('kossek-scoreboard:playerLoaded', -1, Scoreboard.players)
 		end
 	end
 end)

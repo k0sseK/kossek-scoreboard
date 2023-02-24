@@ -4,6 +4,13 @@ local Scoreboard = {
     obj = nil,
     players = {}
 }
+RegisterNetEvent('kossek-scoreboard:playerLoaded', function(players)
+    table.wipe(Scoreboard.players)
+    
+    for i, data in pairs(players) do
+        Scoreboard.players[#Scoreboard.players + 1] = data
+    end
+end)
 
 RegisterNetEvent('kossek-scoreboard:addPlayer', function(playerData)
     Scoreboard.players[#Scoreboard.players + 1] = playerData
