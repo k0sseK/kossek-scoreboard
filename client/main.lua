@@ -110,22 +110,26 @@ CreateThread(function()
 end)
 
 RegisterCommand('+scoreboard', function()
-    Scoreboard.displaying = true
+    if #Scoreboard.players > 0 then
+        Scoreboard.displaying = true
 
-    local playerPed = PlayerPedId()
-    local playerPos = GetEntityCoords(playerPed)
+        local playerPed = PlayerPedId()
+        local playerPos = GetEntityCoords(playerPed)
 
-    if not IsPedInAnyVehicle(playerPed) and not IsPedFalling(playerPed) and not IsPedCuffed(playerPed) and not IsPedDiving(playerPed) and not IsPedInCover(playerPed, false) and not IsPedInParachuteFreeFall(playerPed) and GetPedParachuteState(playerPed) < 1 then
-        LoadDict('amb@world_human_clipboard@male@idle_a')
-        TaskPlayAnim(playerPed, 'amb@world_human_clipboard@male@idle_a', 'idle_a', 8.0, -8.0, -1, 1, 0.0, false, false, false)
+        if not IsPedInAnyVehicle(playerPed) and not IsPedFalling(playerPed) and not IsPedCuffed(playerPed) and not IsPedDiving(playerPed) and not IsPedInCover(playerPed, false) and not IsPedInParachuteFreeFall(playerPed) and GetPedParachuteState(playerPed) < 1 then
+            LoadDict('amb@world_human_clipboard@male@idle_a')
+            TaskPlayAnim(playerPed, 'amb@world_human_clipboard@male@idle_a', 'idle_a', 8.0, -8.0, -1, 1, 0.0, false, false, false)
 
-        Scoreboard.obj = CreateObject(`p_cs_clipboard`, playerPos.x, playerPos.y, playerPos.z, true, false, false)
-        AttachEntityToEntity(Scoreboard.obj, playerPed, GetPedBoneIndex(playerPed, 36029), 0.1, 0.015, 0.12, 45.0, -130.0, 180.0, true, false, false, false, 0, true)
-    end
+            Scoreboard.obj = CreateObject(`p_cs_clipboard`, playerPos.x, playerPos.y, playerPos.z, true, false, false)
+            AttachEntityToEntity(Scoreboard.obj, playerPed, GetPedBoneIndex(playerPed, 36029), 0.1, 0.015, 0.12, 45.0, -130.0, 180.0, true, false, false, false, 0, true)
+        end
 
-    OpenScoreboard()
-    if Config.IdOverHead then
-        DrawId()
+        OpenScoreboard()
+        if Config.IdOverHead then
+            DrawId()
+        end
+    else
+        print('^0[^1ERROR^0] Table ^2Scoreboard.players ^0is empty, probably not loaded yet!')
     end
 end)
 

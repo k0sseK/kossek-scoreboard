@@ -41,13 +41,14 @@
 
         <div class="player-list" id="player-list">
             <div class="player" v-for="(value, index) in this.players" :key="index" :class="{ self: value.id == myId }">
-                <img class="avatar" :src="value.avatar"/>
+                <img class="avatar" :src="value.avatar" v-if="value.avatar"/>
+                <img class="avatar" src="./assets/no-image.png" v-else/>
                 <div class="info">
                     <div class="name">
                         <span class="username">{{ value.name }}</span>
                         <span class="id">{{ value.id }}</span>
                     </div>
-                    <div class="identifier">{{ value.identifier }}</div>
+                    <div class="identifier">{{ value.identifier || 'No identifier' }}</div>
                 </div>
             </div>
         </div>
